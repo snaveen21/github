@@ -1,0 +1,114 @@
+LDAP Pwd
+openldap
+
+LDAPClient confg
+
+yum install -y openldap-clients nss-pam-ldapd nfs-utils nfs-utils-lib
+
+
+authconfig-tui
+
+[root@linux2 ~]# authconfig-tui
+Steps to follow for LDAP Authentication:
+
+1. Put '*' Mark on "Use LDAP"
+2. Put '*' Mark on "Use LDAP Authentication"
+3. Select "Next" and Enter.
+4. Enter the server field as "ldap://dn04.hwx.com/"
+5. Enter the Base DN Field as "dc=hwx,dc=net"
+6. Select "OK" and Enter
+------------------------------------
+
+2. Test the Client Configuration.
+Search the ldap user using the below command and check the output. If you get output, then our LDAP Configurations are working properly.
+[root@linux2 ~]# getent passwd user1
+
+exportfs -a
+
+
+in client 
+
+yum install nfs-utils nfs-utils-lib
+
+ mount dn04:/home /home
+
+echo  "mount dn04:/home /home" >> /etc/rc.local
+cat /etc/rc.local
+
+
+
+
+
+ put in place the following in fstab
+ vi /etc/fstab
+
+dn04:/home   /home   auto  defaults 0 0
+
+
+
+
+
+
+authconfig-tui: Authentication module /lib64/security/pam_fprintd.so is missing. Authentication process might not work correctly.
+
+
+ldapsearch -x cn=user1 -b dc=hwx,dc=hwx
+
+
+ ldapadd -x -W -D "cn=Manager,dc=hwx,dc=net" -f /root/users.ldif
+ldapadd -x -W -D "cn=Manager,dc=hwx,dc=com" -f /root/users1.ldif
+
+
+
+/home /etc/auto.autofs --timeout=600
+
+{SSHA}RWS6DbKMzpEbImmBGZiCiYu6aFpZocAD
+
+
+
+openssl req -new -x509 -nodes -out /etc/pki/tls/certs/hwxldap.pem -keyout /etc/pki/tls/certs/hwxldapkey.pem -days 765
+
+
+authconfig-tui
+Enable LDAP,LDAP Authentication and Kerbarose
+
+
+to get rid of the following error
+authconfig-tui: Authentication module /lib64/security/pam_fprintd.so is missing. Authentication process might not work correctly.
+
+
+Use the following cmd to fix the above error
+authconfig --disablefingerprint --update
+
+
+
+
+vi /etc/auto.master
+/home   /etc/auto.autofs --timeout=600
+
+cd /etc
+
+echo "*   dn04:/home/&"> /etc/auto.autofs
+
+service autofs restart
+
+
+chkconfig autofs on
+service autofs start
+service autofs status
+
+
+vi /etc/ssh/ssh_config
+
+   GSSAPIAuthentication yes
+   GSSAPIDelegateCredentials yes
+
+
+service sshd restart
+ldapadd -x -W -D "cn=Manager,dc=hwx,dc=com" -f /root/groups.ldif
+
+
+ ldapadd -x -W -D "cn=Manager,dc=hwx,dc=com" -f /root/ranger.ldif
+
+
+ ldapadd -x -W -D "cn=Manager,dc=hwx,dc=net" -f /root/svc_hdfs.ldif

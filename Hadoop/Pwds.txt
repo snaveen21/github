@@ -1,0 +1,42 @@
+AMBARI 2.4 Credentials
+
+ambari admin user: admin
+pwd: admin
+
+
+DB PostgreSQL
+DBNAME:ambari
+
+User:ambari
+PWD: bigdata
+
+
+
+Grafana:
+USER: admin
+PWD: admin
+
+
+ActivityAnalysis:
+
+USER:admin
+Pwd:admin
+
+Hive:
+User: hive
+PWD: hadoop
+
+Ranger:
+
+MysqlDB:
+super user admin/admin
+
+DB Name: ranger
+User: ranger
+pwd: ranger
+DB Name: ranger_audit
+User: rangerlogger
+pwd: ranger
+
+Knox: Secret
+Pwd: admin

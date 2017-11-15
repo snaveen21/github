@@ -25,7 +25,7 @@ authentication.ldap.userObjectClass=posixAccount
 authentication.ldap.usernameAttribute=uid
 client.security=ldap
 
-
+------------------------------------------------------------------------
 ------------------------------------------------------------------------
 #Check Wheather Ambari is using postgres
 #Default DB username=ambari and default password is bigdata
