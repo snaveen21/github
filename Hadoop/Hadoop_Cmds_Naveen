@@ -1,0 +1,57 @@
+------------------------------------------------------------------------
+Ambari- server Info
+Via REST API
+------------------------------------------------------------------------
+http://mgt01.hwx.com:8080/api/v1/services/AMBARI/components/AMBARI_SERVER?fields=RootServiceComponents/properties
+
+
+------------------------------------------------------------------------
+Ambari Ldap configuration settings
+------------------------------------------------------------------------
+[root@mgt01 ~]# cat /etc/ambari-server/conf/ambari.properties | grep ldap
+ambari.ldap.isConfigured=true
+authentication.ldap.baseDn=dc=hwx,dc=com
+authentication.ldap.bindAnonymously=false
+authentication.ldap.dnAttribute=dn
+authentication.ldap.groupMembershipAttr=memberUid
+authentication.ldap.groupNamingAttr=cn
+authentication.ldap.groupObjectClass=posixGroup
+authentication.ldap.managerDn=cn=Manager,dc=hwx,dc=com
+authentication.ldap.managerPassword=/etc/ambari-server/conf/ldap-password.dat
+authentication.ldap.primaryUrl=dn04.hwx.com:389
+authentication.ldap.referral=ignore
+authentication.ldap.useSSL=false
+authentication.ldap.userObjectClass=posixAccount
+authentication.ldap.usernameAttribute=uid
+client.security=ldap
+
+
+------------------------------------------------------------------------
+#Check Wheather Ambari is using postgres
+#Default DB username=ambari and default password is bigdata
+------------------------------------------------------------------------
+[root@mgt01 ~]# ps -eaf | grep ambari | grep postgres | awk '{print $3}'
+1
+1386
+1386
+1386
+1386
+1386
+1386
+1386
+1386
+1386
+1386
+[root@mgt01 ~]# netstat -anp | grep 1386
+tcp        0      0 0.0.0.0:5432                0.0.0.0:*                   LISTEN      1386/postmaster
+tcp        0      0 :::5432                     :::*                        LISTEN      1386/postmaster
+udp        0      0 ::1:49743                   ::1:49743                   ESTABLISHED 1386/postmaster
+unix  2      [ ACC ]     STREAM     LISTENING     9758   1386/postmaster     /tmp/.s.PGSQL.5432
+[root@mgt01 ~]# psql ambari -U ambari -W -p 5432
+Password for user ambari:
+psql (8.4.20)
+Type "help" for help.
+
+ambari=>
+
+------------------------------------------------------------------------

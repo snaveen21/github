@@ -1,0 +1,60 @@
+[root@mgt01 ~]# ambari-server setup-ldap
+Using python  /usr/bin/python
+Setting up LDAP properties...
+Primary URL* {host:port} : dn04.hwx.com:389
+Secondary URL {host:port} :
+Use SSL* [true/false] (false):
+User object class* (posixAccount):
+User name attribute* (uid):
+Group object class* (posixGroup):
+Group name attribute* (cn):
+Group member attribute* (memberUid):
+Distinguished name attribute* (dn):
+Base DN* : ou=hadoop,dc=hwx,dc=com
+Referral method [follow/ignore] : ignore
+Bind anonymously* [true/false] (false):
+Manager DN* :  cn=Manager,dc=hwx,dc=com
+Enter Manager Password* :
+Re-enter password:
+Passwords do not match
+Enter Manager Password* :openldap
+Re-enter password:openldap
+====================
+Review Settings
+====================
+authentication.ldap.managerDn:  cn=Manager,dc=hwx,dc=com
+authentication.ldap.managerPassword: *****
+Save settings [y/n] (y)? y
+Saving...done
+Ambari Server 'setup-ldap' completed successfully.
+[root@mgt01 ~]#
+--------------------
+Ambari sync existing users.
+--------------------
+ambari-server sync-ldap --existing
+--------------------
+Ambari sync All users.
+--------------------
+ambari-server sync-ldap --all
+
+
+
+------------------------------------------------------------------------
+Ambari Ldap configuration settings
+------------------------------------------------------------------------
+[root@mgt01 ~]# cat /etc/ambari-server/conf/ambari.properties | grep ldap
+ambari.ldap.isConfigured=true
+authentication.ldap.baseDn=dc=hwx,dc=com
+authentication.ldap.bindAnonymously=false
+authentication.ldap.dnAttribute=dn
+authentication.ldap.groupMembershipAttr=memberUid
+authentication.ldap.groupNamingAttr=cn
+authentication.ldap.groupObjectClass=posixGroup
+authentication.ldap.managerDn=cn=Manager,dc=hwx,dc=com
+authentication.ldap.managerPassword=/etc/ambari-server/conf/ldap-password.dat
+authentication.ldap.primaryUrl=dn04.hwx.com:389
+authentication.ldap.referral=ignore
+authentication.ldap.useSSL=false
+authentication.ldap.userObjectClass=posixAccount
+authentication.ldap.usernameAttribute=uid
+client.security=ldap
