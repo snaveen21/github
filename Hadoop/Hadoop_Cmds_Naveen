@@ -55,16 +55,12 @@ Type "help" for help.
 ambari=>
 
 ------------------------------------------------------------------------
+Host Checks
+------------------------------------------------------------------------
 Note: To clean up in interactive mode, remove --silent option. To clean up all resources, including users,
  remove --skip=users option. Use --help for a list of available options.
 Note: Clean up of Firewall and Transparent Huge Page issues are not supported by the HostCleanup script.
 Host Checks
 
-
-Host Checks
-
-
-
-
-
 python /usr/lib/python2.6/site-packages/ambari_agent/HostCleanup.py --silent --skip=users
+------------------------------------------------------------------------
