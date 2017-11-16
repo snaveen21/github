@@ -1,0 +1,8 @@
+Mysql Cmds
+
+connecting:
+mysql -u root -p
+Enter password:
+
+List all users in the database.
+SELECT User, Host FROM mysql.user;
