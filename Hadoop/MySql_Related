@@ -6,3 +6,11 @@ Enter password:
 
 List all users in the database.
 SELECT User, Host FROM mysql.user;
+
+CREATE USER 'rangeradmin'@'dn04.hwx.com' IDENTIFIED BY 'ranger';
+GRANT ALL PRIVILEGES ON *.* TO 'rangeradmin'@'DN04.hwx.com';
+GRANT ALL PRIVILEGES ON *.* TO 'rangeradmin'@'DN04.hwx.com' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON *.* TO 'rangeradmin'@'DN04.hwx.com' WITH GRANT OPTION;
+
+
+UPDATE mysql.db SET Host='DN04.hwx.com' WHERE Host='dn04.hwx.com' AND User='rangeradmin';
