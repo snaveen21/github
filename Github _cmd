@@ -5,4 +5,6 @@ To Push new files to existing Repositories.
 -- For the first time.
 git add README.md
 git commit -m "first commit"
+-- To push all files in the current dir
+git add -A 
 git push
