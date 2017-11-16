@@ -1,0 +1,10 @@
+To initilise any Github Repository
+git clone https://github.com/snaveen21/github
+
+To Push new files to existing Repositories.
+-- For the first time.
+git add README.md
+git commit -m "first commit"
+-- To push all files in the current dir
+git add -A 
+git push
